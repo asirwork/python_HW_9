@@ -26,14 +26,6 @@ def exit_command(*args):
     return "Good bye!"
 
 
-def good_bye_command(*args):
-    return "Good bye!"
-
-
-def close_command(*args):
-    return "Good bye!"
-
-
 def unknown_command(*args):
     return "Unknown command, try again."
 
@@ -84,20 +76,20 @@ def add_command(*args):
 
 
 COMMANDS = {
-    help_command: "help",
-    hello_command: "hello",
-    add_command: "add",
-    exit_command: "exit",
-    good_bye_command: "good bye",
-    close_command: "close",
-    show_all_command: "show all",
-    change_command: "change",
-    phone_command: "phone"
+    "help": help_command,
+    "hello": hello_command,
+    "add": add_command,
+    "exit": exit_command,
+    "good bye": exit_command,
+    "close": exit_command,
+    "show all": show_all_command,
+    "change": change_command,
+    "phone": phone_command
 }
 
 
 def command_handler(text):
-    for command, kword in COMMANDS.items():
+    for kword, command in COMMANDS.items():
         if text.startswith(kword):
             return command, text.replace(kword, "").strip()
     return unknown_command, None
@@ -109,7 +101,7 @@ def main():
         user_input = input(">>>").lower()
         command, data = command_handler(user_input)
         print(command(data))
-        if command in [exit_command, good_bye_command, close_command]:
+        if command == exit_command:
             break
 
 
